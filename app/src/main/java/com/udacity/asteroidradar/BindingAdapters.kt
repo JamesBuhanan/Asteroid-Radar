@@ -2,7 +2,21 @@ package com.udacity.asteroidradar
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import com.udacity.asteroidradar.main.AsteroidAdapter
+
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Picasso.with(imgView.context)
+            .load(imgUri)
+            .into(imgView)
+    }
+}
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -38,4 +52,21 @@ fun bindTextViewToKmUnit(textView: TextView, number: Double) {
 fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
+}
+
+@BindingAdapter("statusDescription")
+fun ImageView.statusDescription(potentiallyHazardous: Boolean) {
+    contentDescription = if (potentiallyHazardous) {
+        resources.getString(R.string.potentially_hazardous_asteroid_image)
+    } else {
+        resources.getString(R.string.not_hazardous_asteroid_image)
+    }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, asteroids: List<Asteroid>?) {
+    asteroids?.let {
+        val adapter = recyclerView.adapter as AsteroidAdapter
+        adapter.submitList(asteroids)
+    }
 }
