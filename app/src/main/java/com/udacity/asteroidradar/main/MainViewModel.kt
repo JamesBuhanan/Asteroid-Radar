@@ -21,10 +21,11 @@ class MainViewModel(application: Application) : ViewModel() {
     val status: LiveData<AsteroidApiStatus>
         get() = _status
 
+    //apikey needed below
     init {
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main.immediate) {
-                val apiKey = "gHdutngudHFX0kGdm0mEyzSKbT5BhgonZ1X5FpgI"
+                val apiKey = ""
 
                 try {
                     _status.value = AsteroidApiStatus.LOADING

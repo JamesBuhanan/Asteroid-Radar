@@ -15,10 +15,11 @@ class AsteroidRepository(private val database: AsteroidsDatabase) {
             it.asDomainModel()
         }
 
+    //apikey needed below
     suspend fun saveAsteroids() {
         withContext(Dispatchers.IO) {
             val jsonString = Network.asteroidService
-                .getAsteroids("gHdutngudHFX0kGdm0mEyzSKbT5BhgonZ1X5FpgI")
+                .getAsteroids("")
             val jsonObject = JSONObject(jsonString)
             val asteroids = parseAsteroidsJsonResult(jsonObject)
             val databaseAsteroids = asteroids.asDatabaseModel().toTypedArray()
