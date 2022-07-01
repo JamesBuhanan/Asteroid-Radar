@@ -22,6 +22,7 @@ class AsteroidRepository(private val database: AsteroidsDatabase) {
             val jsonObject = JSONObject(jsonString)
             val asteroids = parseAsteroidsJsonResult(jsonObject)
             val databaseAsteroids = asteroids.asDatabaseModel().toTypedArray()
+            database.clearAllTables()
             database.asteroidDao.insertAll(*databaseAsteroids)
         }
     }
