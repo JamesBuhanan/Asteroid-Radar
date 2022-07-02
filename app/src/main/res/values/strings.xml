@@ -23,5 +23,5 @@
     <string name="asteroid_date">Asteroid Date</string>
     <string name="potentially_hazardous">Potentially hazardous</string>
     <string name="explanation_button">Explanation button</string>
-    <string name="detail_picture">Asteroid</string>
+    <string name="picture_of_the_day">Picture of the Day</string>
 </resources>
